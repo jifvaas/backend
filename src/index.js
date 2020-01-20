@@ -1,24 +1,19 @@
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
-const os = require('os');
+const getEntries = require('./entries');
 
 const app = express();
 
+const port = process.env.PORT || 3000;
+
+const entries = getEntries(path.join(__dirname, '..', 'entries.txt'));
+
 app.get('/', (req, res) => {
-    const entriesString = fs.readFileSync(path.join(__dirname, '..', 'entries.txt'), 'utf-8');
-
-    const array = entriesString.split(os.EOL).map((item, index) => ({ index, value: item }));
-
-    res.send(array);
+    res.send(entries);
 });
 
 app.get('/:index', (req, res) => {
-    const entriesString = fs.readFileSync(path.join(__dirname, '..', 'entries.txt'), 'utf-8');
-
-    const array = entriesString.split(os.EOL).map((item, index) => ({ index, value: item }));
-
-    res.send(array[req.params.index]);
+    res.send(entries[req.params.index]);
 });
 
-app.listen(3000, () => console.log("Started JIFVAAS backend on port 3000"));
+app.listen(port, () => console.log(`Started JIFVAAS backend on port ${ port }`));
