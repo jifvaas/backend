@@ -16,4 +16,11 @@ app.get('/:index', (req, res) => {
     res.send(entries[req.params.index]);
 });
 
-app.listen(port, () => console.log(`Started JIFVAAS backend on port ${ port }`));
+const server = app.listen(port, () => console.log(`Started JIFVAAS backend on port ${ port }`));
+
+process.on('SIGINT', () => {
+    console.log('Gracefully shutting down your express server');
+  
+    server.close();
+});
+  
