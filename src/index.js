@@ -4,7 +4,7 @@ const getEntries = require('./entries');
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 const entries = getEntries(path.join(__dirname, '..', 'entries.txt'));
 
@@ -16,4 +16,11 @@ app.get('/:index', (req, res) => {
     res.send(entries[req.params.index]);
 });
 
-app.listen(port, () => console.log(`Started JIFVAAS backend on port ${ port }`));
+const server = app.listen(port, () => console.log(`Started JIFVAAS backend on port ${ port }`));
+
+process.on('SIGINT', () => {
+    console.log('Gracefully shutting down your express server');
+  
+    server.close();
+});
+  
