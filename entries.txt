@@ -13,3 +13,5 @@ Sonos
 Wireless Cinema
 Europa
 Topografie
+AMD
+Intel
