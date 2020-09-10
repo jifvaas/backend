@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const getEntries = require('./entries');
 
 const app = express();
@@ -7,6 +8,11 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 const entries = getEntries(path.join(__dirname, '..', 'entries.txt'));
+
+app.use(cors({
+    origin: '*',
+    methods: "GET"
+}));
 
 app.get('/', (req, res) => {
     res.send(entries);
