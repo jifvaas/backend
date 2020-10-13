@@ -16,3 +16,6 @@ Topografie
 AMD
 Intel
 JDBI
+JSD
+XSD
+XML
