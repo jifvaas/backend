@@ -20,3 +20,5 @@ JSD
 XSD
 XML
 jimisfanvan.nl
+GitLab (runners)
+Jenkins
